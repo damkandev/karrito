@@ -29,6 +29,7 @@ Estas tiendas tienen selectores configurados pero no han sido verificados al 100
 | Mercado Libre MX | mercadolibre.com.mx |
 | Mercado Libre AR | mercadolibre.com.ar |
 | Mercado Libre CO | mercadolibre.com.co |
+| Mercado Libre Chile | mercadolibre.cl |
 | eBay | ebay.com |
 | Walmart | walmart.com |
 | Walmart México | walmart.com.mx |
@@ -38,6 +39,10 @@ Estas tiendas tienen selectores configurados pero no han sido verificados al 100
 | Zara | zara.com |
 | Nike | nike.com |
 | Adidas | adidas.com |
+| Falabella | falabella.com |
+| Ripley | ripley.cl |
+| Paris | paris.cl |
+| Lider | lider.cl |
 
 > Para tiendas no listadas, Karrito usa selectores genéricos (`[itemprop="price"]`, `.price`, `og:title`, etc.) que funcionan en la mayoría de sitios.
 

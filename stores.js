@@ -47,6 +47,11 @@ const KARRITO_STORES = {
     price: ['.andes-money-amount__fraction', '[itemprop="price"]'],
     productName: ['.ui-pdp-title', 'h1'],
   },
+  'mercadolibre.cl': {
+    name: 'Mercado Libre Chile',
+    price: ['.andes-money-amount__fraction', '[itemprop="price"]'],
+    productName: ['.ui-pdp-title', 'h1'],
+  },
   'ebay.com': {
     name: 'eBay',
     price: ['.x-price-primary .ux-textspans', '[itemprop="price"]', '.display-price'],
@@ -91,5 +96,25 @@ const KARRITO_STORES = {
     name: 'Adidas',
     price: ['.gl-price-item', '[data-auto-id="gl-price-item"]'],
     productName: ['h1.name-container', 'h1[data-auto-id="product-title"]'],
+  },
+  'falabella.com': {
+    name: 'Falabella',
+    price: ['.prices-0 .copy10', '[data-price]', '.jsx-price'],
+    productName: ['.product-name', 'h1'],
+  },
+  'ripley.cl': {
+    name: 'Ripley',
+    price: ['.product-price', '.price-selector', '[itemprop="price"]'],
+    productName: ['.product-header__name', 'h1'],
+  },
+  'paris.cl': {
+    name: 'Paris',
+    price: ['.product-price', '[itemprop="price"]', '.price'],
+    productName: ['.product-name', 'h1'],
+  },
+  'lider.cl': {
+    name: 'Lider',
+    price: ['.product-price', '[data-price]', '.price'],
+    productName: ['.product-title', 'h1'],
   },
 };
