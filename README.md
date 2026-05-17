@@ -14,13 +14,13 @@ Extensión de Chrome que funciona como un carrito de compras global — guarda p
 
 ### ✅ Soporte confirmado
 
-| Tienda | Dominio | Captura |
-|--------|---------|---------|
-| Amazon | amazon.com | ![Amazon](screenshots/amazon.png) |
-| Amazon México | amazon.com.mx | ![Amazon MX](screenshots/amazon-mx.png) |
-| Mercado Libre MX | mercadolibre.com.mx | ![ML MX](screenshots/mercadolibre-mx.png) |
-| Mercado Libre AR | mercadolibre.com.ar | ![ML AR](screenshots/mercadolibre-ar.png) |
-| Mercado Libre CO | mercadolibre.com.co | ![ML CO](screenshots/mercadolibre-co.png) |
+| Tienda | Dominio |
+|--------|---------|
+| Amazon | amazon.com |
+| Amazon México | amazon.com.mx |
+| Mercado Libre MX | mercadolibre.com.mx |
+| Mercado Libre AR | mercadolibre.com.ar |
+| Mercado Libre CO | mercadolibre.com.co |
 
 ### ⚠️ Soporte probable
 
