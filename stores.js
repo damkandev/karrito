@@ -15,6 +15,13 @@
  */
 const KARRITO_STORES = {
   // ✅ Soporte confirmado
+  'sotos.app': {
+    name: 'Sotos',
+    price: ['[itemprop="price"]', '.price', '[data-price]'],
+    productName: ['[itemprop="name"]', 'h1', 'h3'],
+  },
+
+  // ⚠️ Soporte probable (selectores basados en estructura común, no verificado al 100%)
   'amazon.com': {
     name: 'Amazon',
     price: ['.a-price .a-offscreen', '#priceblock_ourprice', '#priceblock_dealprice', '.a-price-whole'],
@@ -40,8 +47,6 @@ const KARRITO_STORES = {
     price: ['.andes-money-amount__fraction', '[itemprop="price"]'],
     productName: ['.ui-pdp-title', 'h1'],
   },
-
-  // ⚠️ Soporte probable (selectores basados en estructura común, no verificado al 100%)
   'ebay.com': {
     name: 'eBay',
     price: ['.x-price-primary .ux-textspans', '[itemprop="price"]', '.display-price'],

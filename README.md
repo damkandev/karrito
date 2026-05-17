@@ -16,11 +16,7 @@ Extensión de Chrome que funciona como un carrito de compras global — guarda p
 
 | Tienda | Dominio |
 |--------|---------|
-| Amazon | amazon.com |
-| Amazon México | amazon.com.mx |
-| Mercado Libre MX | mercadolibre.com.mx |
-| Mercado Libre AR | mercadolibre.com.ar |
-| Mercado Libre CO | mercadolibre.com.co |
+| Sotos | sotos.app |
 
 ### ⚠️ Soporte probable
 
@@ -28,6 +24,11 @@ Estas tiendas tienen selectores configurados pero no han sido verificados al 100
 
 | Tienda | Dominio |
 |--------|---------|
+| Amazon | amazon.com |
+| Amazon México | amazon.com.mx |
+| Mercado Libre MX | mercadolibre.com.mx |
+| Mercado Libre AR | mercadolibre.com.ar |
+| Mercado Libre CO | mercadolibre.com.co |
 | eBay | ebay.com |
 | Walmart | walmart.com |
 | Walmart México | walmart.com.mx |
