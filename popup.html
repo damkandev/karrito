@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1><span id="header-icon"></span> Karrito</h1>
+      <button id="btn-add" title="Agregar producto actual"></button>
+    </header>
+
+    <div class="tabs">
+      <button class="tab active" data-view="cart">Carrito</button>
+      <button class="tab" data-view="categories">Categorías</button>
+    </div>
+
+    <!-- Vista Carrito -->
+    <div id="view-cart" class="view active">
+      <div class="filter-bar">
+        <select id="filter-category">
+          <option value="all">Todas</option>
+        </select>
+      </div>
+      <div id="product-list" class="product-list"></div>
+      <div class="total-bar">
+        <span>Total estimado:</span>
+        <span id="total-price">$0</span>
+      </div>
+    </div>
+
+    <!-- Vista Categorías -->
+    <div id="view-categories" class="view">
+      <div class="category-form">
+        <input id="new-category" type="text" placeholder="Nueva categoría...">
+        <button id="btn-add-category"></button>
+      </div>
+      <ul id="category-list"></ul>
+    </div>
+  </div>
+
+  <script src="icons.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
