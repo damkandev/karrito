@@ -1,50 +1,67 @@
 // Content script - detecta precio y nombre del producto en la página actual
 (function() {
-  function detectPrice() {
-    const selectors = [
-      '[data-price]', '.price', '.product-price', '#price', '#priceblock_ourprice',
-      '.a-price .a-offscreen', '[itemprop="price"]', '.current-price',
-      '.sale-price', '.offer-price', '.Price', '.product__price',
-      '.font-semibold'
-    ];
+  const host = location.hostname.replace('www.', '');
+  const storeConfig = typeof KARRITO_STORES !== 'undefined' && KARRITO_STORES[host];
+
+  function queryFirst(selectors) {
     for (const sel of selectors) {
-      const els = document.querySelectorAll(sel);
-      for (const el of els) {
-        const attr = el.getAttribute('data-price') || el.getAttribute('content');
-        if (attr) return attr;
-        const text = el.textContent.trim();
-        const match = text.match(/\$[\d.,]+/);
-        if (match) return match[0].replace(/[$.,]/g, '');
-      }
-    }
-    // Meta tags
-    const meta = document.querySelector('meta[property="product:price:amount"]');
-    if (meta) return meta.content;
-    // Fallback: buscar cualquier elemento con patrón de precio $XX.XXX
-    const all = document.body.querySelectorAll('*');
-    for (const el of all) {
-      if (el.children.length === 0) {
-        const match = el.textContent.trim().match(/^\$[\d.,]+$/);
-        if (match) return match[0].replace(/[$.,]/g, '');
+      const el = document.querySelector(sel);
+      if (el) {
+        const text = el.getAttribute('content') || el.textContent.trim();
+        if (text) return text;
       }
     }
     return '';
   }
 
+  function extractPrice(text) {
+    const match = text.match(/[\d.,]+/);
+    return match ? match[0].replace(/[.,](?=\d{3})/g, '').replace(',', '.') : '';
+  }
+
+  function detectPrice() {
+    // 1. Selectores específicos de la tienda
+    if (storeConfig) {
+      const text = queryFirst(storeConfig.price);
+      if (text) return extractPrice(text);
+    }
+    // 2. Selectores genéricos
+    const generic = [
+      '[data-price]', '.price', '.product-price', '#price',
+      '[itemprop="price"]', '.current-price', '.sale-price', '.offer-price'
+    ];
+    for (const sel of generic) {
+      const el = document.querySelector(sel);
+      if (!el) continue;
+      const attr = el.getAttribute('data-price') || el.getAttribute('content');
+      if (attr) return attr;
+      const text = el.textContent.trim();
+      const match = text.match(/\$[\d.,]+/);
+      if (match) return extractPrice(match[0]);
+    }
+    // 3. Meta tags
+    const meta = document.querySelector('meta[property="product:price:amount"]');
+    if (meta) return meta.content;
+    return '';
+  }
+
   function detectName() {
+    if (storeConfig) {
+      const text = queryFirst(storeConfig.productName);
+      if (text) return text;
+    }
     const og = document.querySelector('meta[property="og:title"]');
     if (og) return og.content;
-    const itemprop = document.querySelector('[itemprop="name"]');
-    if (itemprop) return itemprop.textContent.trim();
     const h1 = document.querySelector('h1');
     if (h1) return h1.textContent.trim();
     return document.title;
   }
 
   function detectStore() {
+    if (storeConfig) return storeConfig.name;
     const og = document.querySelector('meta[property="og:site_name"]');
     if (og) return og.content;
-    return location.hostname.replace('www.', '');
+    return host;
   }
 
   function detect() {
@@ -55,12 +72,11 @@
     };
   }
 
-  // Ejecutar inmediatamente y reintentar para SPAs que renderizan tarde
   detect();
   setTimeout(detect, 1500);
   setTimeout(detect, 3000);
 
-  // Inyectar botón "Añadir a Karrito" debajo de botones de compra
+  // Inyectar botón "Añadir a Karrito"
   function injectButton() {
     if (document.getElementById('karrito-inject-btn')) return;
     const keywords = ['comprar', 'añadir al carrito', 'add to cart', 'buy now', 'agregar al carrito'];
@@ -94,7 +110,6 @@
         });
         btn.parentNode.insertBefore(karBtn, btn.nextSibling);
 
-        // Si ya está en el karrito, mostrar botón de eliminar
         chrome.runtime.sendMessage({ action: 'checkInKarrito', url: location.href }, (res) => {
           if (res?.exists && !document.getElementById('karrito-remove-btn')) {
             const removeBtn = document.createElement('button');
@@ -104,14 +119,11 @@
             removeBtn.addEventListener('click', (e) => {
               e.preventDefault();
               e.stopPropagation();
-              chrome.runtime.sendMessage({ action: 'removeFromKarrito', url: location.href }, () => {
-                removeBtn.remove();
-              });
+              chrome.runtime.sendMessage({ action: 'removeFromKarrito', url: location.href }, () => removeBtn.remove());
             });
             karBtn.parentNode.insertBefore(removeBtn, karBtn.nextSibling);
           }
         });
-
         return;
       }
     }
